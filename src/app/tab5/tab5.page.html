@@ -5,13 +5,24 @@
 </ion-header>
 <ion-content [fullscreen]="true">
 
-<ion-list>
+<div class="gap">
   @for(item of history; track $index) {
-    <ion-item>
-      <ion-label>{{ item?.id }}</ion-label>
+    <div class="item-container">
+      <div class="item-detail-container">
+        <ion-label class="class-name">{{ item?.predictions[0].className}}</ion-label>
+        <ion-label>{{ Math.round((item?.predictions[0].probability) * 100) }}%</ion-label>
+      </div>
+      <div class="item-detail-container">
+        <ion-label class="class-name">{{ item?.predictions[1].className}}</ion-label>
+        <ion-label>{{ Math.round((item?.predictions[1].probability) * 100) }}%</ion-label>
+      </div>
+      <div class="item-detail-container">
+        <ion-label class="class-name">{{ item?.predictions[2].className}}</ion-label>
+        <ion-label>{{ Math.round((item?.predictions[2].probability) * 100) }}%</ion-label>
+      </div>
       <img [src]="item?.image" alt="">
-    </ion-item>
+    </div>
   }
-</ion-list>
+</div>
 
 </ion-content>

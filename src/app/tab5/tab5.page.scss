@@ -1,0 +1,37 @@
+.item-container {
+    display: flex;
+    justify-content: space-around; 
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #b7b7b72a;
+    background-color: rgb(28, 28, 28);
+}
+
+@media(max-width: 768px) {
+    .item-container {
+        flex-direction: column;
+        gap: .7rem;
+    }
+}
+
+.item-detail-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: .3rem;
+}
+
+.item-containter img {
+    width: 100%;
+    height: auto;
+}
+
+.gap {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.class-name {
+    color: rgb(154, 242, 171);
+}

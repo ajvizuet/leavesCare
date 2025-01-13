@@ -13,6 +13,7 @@ import { ProviderService } from '../services/provider.service';
 })
 export class Tab5Page implements OnInit {
 
+  Math = Math;
   history: any[] = [];
   collectionName = 'history';
 
@@ -24,8 +25,7 @@ export class Tab5Page implements OnInit {
 
   loadData() {
     this.providerService.readCollection(this.collectionName).subscribe((data) => {
-      this.history = data;
-      console.log(this.history);
+      this.history = data.reverse();
     });
   }
 }
