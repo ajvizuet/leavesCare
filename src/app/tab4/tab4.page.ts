@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TeachablemachineService } from '../services/teachablemachine.service';
 import { ProviderService } from '../services/provider.service';
+import { __setFunctionName } from 'tslib';
 
 @Component({
   selector: 'app-tab4',
@@ -20,9 +21,11 @@ import { ProviderService } from '../services/provider.service';
 export class Tab4Page {
 
 
-  imageReady = signal(false)
+  imageReady = signal(false);
 
-  imageUrl = signal("")
+  imageUrl = signal("");
+  feedbackSignal = signal(false);
+  efficiencyRef = signal(0.00);
    /* Declare la referencia al elemento con el id image */
    @ViewChild('image', { static: false }) imageElement!: ElementRef<HTMLImageElement>;
   selected_value = signal<string | null>(null);  // estado inicial del select
@@ -38,11 +41,20 @@ export class Tab4Page {
   constructor(private teachablemachine: TeachablemachineService, 
     private providerService: ProviderService) {
       addIcons({ cloudUploadOutline });
+      
+      this.getEfficiency();
+
    }
    
    myForm: FormGroup = new FormGroup({
       type: new FormControl("", Validators.required)
    })
+
+
+   resultForm: FormGroup = new FormGroup({
+      answer: new FormControl("", Validators.required)
+   })
+   
 
   async changeValue(event: CustomEvent){
     const value = (event.target as HTMLIonSelectElement).value
@@ -87,21 +99,44 @@ export class Tab4Page {
 
         reader.readAsDataURL(file); // Leer el archivo como base64
     }
-}
-async predict() {
-  try {
-      const image = this.imageElement.nativeElement;
-      this.predictions = await this.teachablemachine.predict(image);
-      this.providerService.createDocument("history",{ image: this.imageUrl(),
-        predictions: this.predictions
-      });
-  } catch (error) {
-      console.error(error);
-      alert('Error al realizar la predicción.');
   }
-}
+  async predict() {
+    try {
+        const image = this.imageElement.nativeElement;
+        this.predictions = await this.teachablemachine.predict(image);
+        this.providerService.createDocument("history",{ image: this.imageUrl(),
+          predictions: this.predictions
+
+        });
+        this.feedbackSignal.set(true);
+    } catch (error) {
+        console.error(error);
+        alert('Error al realizar la predicción.');
+    }
+  }
+
+  async sendFeedbackDB(event:Event) {
+    const ans = (event.target as HTMLIonSelectElement).value
+    if(ans){
+      this.providerService.updateFeedback("results", "results_predictions", ans)
+    }
+    else{
+      throw new Error("couldn't update fields")
+    }
+  }
+
+  async getEfficiency(){
+    const values = await this.providerService.getData("results", "results_predictions")
+    if( values !==undefined){
+      const times_yes = values["yes"];
+      const times_no = values["no"]
+      const effiency = ((times_yes)/ (times_yes + times_no)) * 100
+      console.log(`${times_no} and ${times_yes}`)
+      this.efficiencyRef.set(effiency) 
+    }
 
 
+  }
 
 
 }

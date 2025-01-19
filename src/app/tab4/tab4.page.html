@@ -23,7 +23,7 @@
   <input #fileInput type="file" accept="image/*" (change)= "onFileSelected($event)" hidden />
 
   <ion-card class="clickable" style="margin-top: 30px;"  (click)="selected_value() ? fileInput.click() : null" >
-    
+    <div class="div_horizontal"> <h1>  {{efficiencyRef()}}%</h1></div>
     <ion-card-content class="div_horizontal">
         <div class=" container_items_centered">
             <h1>Health check</h1>
@@ -41,10 +41,21 @@
     </ion-card>
     @if(modelLoaded()) {
 
+    <div id="predictionContainer">
       <div class="ion-text-center ion-padding-top ion-padding-bottom">
         <ion-button fill="outline" color="success" (click)="predict()">Predecir</ion-button>
       </div>
+      @if(feedbackSignal()){
+        <div class="div_horizontal"> 
+          <form [formGroup]="resultForm">
+              <ion-select formControlName="answer" placeHolder="Was it helpful?" (ionChange)="sendFeedbackDB($event)">
+                  <ion-select-option name="yes">yes</ion-select-option>
+                  <ion-select-option name="no">no</ion-select-option>
+              </ion-select>
   
+          </form>
+        </div>
+      }
       <ion-list>
         <ion-item>
           <ion-label>Clases: {{ classLabels }} </ion-label>
@@ -57,8 +68,9 @@
         }
   
       </ion-list>
-  
+    </div>
       }
+   
   }
 
  
