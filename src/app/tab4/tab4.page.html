@@ -21,9 +21,9 @@
   
   
   <input #fileInput type="file" accept="image/*" (change)= "onFileSelected($event)" hidden />
-
+    <div class="div_horizontal"> <h1>  AI Efficiency {{efficiencyRef()}}%</h1></div>
   <ion-card class="clickable" style="margin-top: 30px;"  (click)="selected_value() ? fileInput.click() : null" >
-    <div class="div_horizontal"> <h1>  {{efficiencyRef()}}%</h1></div>
+
     <ion-card-content class="div_horizontal">
         <div class=" container_items_centered">
             <h1>Health check</h1>
