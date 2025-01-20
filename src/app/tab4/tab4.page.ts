@@ -25,7 +25,7 @@ export class Tab4Page {
 
   imageUrl = signal("");
   feedbackSignal = signal(false);
-  efficiencyRef = signal(0.00);
+  efficiencyRef = signal(0);
    /* Declare la referencia al elemento con el id image */
    @ViewChild('image', { static: false }) imageElement!: ElementRef<HTMLImageElement>;
   selected_value = signal<string | null>(null);  // estado inicial del select
@@ -119,24 +119,24 @@ export class Tab4Page {
     const ans = (event.target as HTMLIonSelectElement).value
     if(ans){
       this.providerService.updateFeedback("results", "results_predictions", ans)
+      this.getEfficiency();
     }
     else{
       throw new Error("couldn't update fields")
     }
   }
 
-  async getEfficiency(){
-    const values = await this.providerService.getData("results", "results_predictions")
-    if( values !==undefined){
-      const times_yes = values["yes"];
-      const times_no = values["no"]
-      const effiency = ((times_yes)/ (times_yes + times_no)) * 100
-      console.log(`${times_no} and ${times_yes}`)
-      this.efficiencyRef.set(effiency) 
+  async getEfficiency() {
+    const values = await this.providerService.getData("results", "results_predictions");
+    if (values !== undefined) {
+        const times_yes = values["yes"];
+        const times_no = values["no"];
+        const efficiency = ((times_yes) / (times_yes + times_no)) * 100;
+        const efficiencyRounded = parseFloat(efficiency.toFixed(2)); // Redondear a 2 decimales
+        console.log(`${times_no} and ${times_yes}`);
+        this.efficiencyRef.set(efficiencyRounded);
     }
-
-
-  }
+}
 
 
 }

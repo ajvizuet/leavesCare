@@ -10,15 +10,15 @@
     <div class="item-container">
       <div class="item-detail-container">
         <ion-label class="class-name">{{ item?.predictions[0].className}}</ion-label>
-        <ion-label>{{ Math.round((item?.predictions[0].probability) * 100) }}%</ion-label>
+        <ion-label style="color: white;">{{ Math.round((item?.predictions[0].probability) * 100) }}%</ion-label>
       </div>
       <div class="item-detail-container">
         <ion-label class="class-name">{{ item?.predictions[1].className}}</ion-label>
-        <ion-label>{{ Math.round((item?.predictions[1].probability) * 100) }}%</ion-label>
+        <ion-label style="color: white">{{ Math.round((item?.predictions[1].probability) * 100) }}%</ion-label>
       </div>
       <div class="item-detail-container">
         <ion-label class="class-name">{{ item?.predictions[2].className}}</ion-label>
-        <ion-label>{{ Math.round((item?.predictions[2].probability) * 100) }}%</ion-label>
+        <ion-label style="color: white;">{{ Math.round((item?.predictions[2].probability) * 100) }}%</ion-label>
       </div>
       <img [src]="item?.image" alt="">
     </div>
