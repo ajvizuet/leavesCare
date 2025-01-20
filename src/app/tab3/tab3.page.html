@@ -8,12 +8,58 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
+  <!-- boton acerca de que es LeavesCares -->
   <ion-card>
+  <ion-button (click)="presentAlert()">
+    <ion-label>¿Qué es LeavesCares?</ion-label>
+    <ion-icon slot="end" name="information-circle"></ion-icon>
+  </ion-button>
+  </ion-card>
+
+<!--   <ion-card>
+    <ion-card-header>
+      <ion-card-title>¿Qué es LeavesCares?</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Sistema avanzado de detección de enfermedades en hojas mediante Inteligencia Artificial, diseñado para ayudar a los cultivos de manzanos, plantas de papa y uva.</p>
+    </ion-card-content>
+  </ion-card> -->
+  
+
+  <!-- Problema y la solucion -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="titulo">El Problema</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>La agricultura ha sido un pilar fundamental de la sociedad durante siglos, sosteniendo económicamente a numerosas comunidades y organizaciones. Sin embargo, el cuidado efectivo de los cultivos presenta desafíos significativos, especialmente en la detección y manejo de enfermedades. Aunque los agricultores adopten medidas preventivas, no siempre logran detectar a tiempo brotes de hongos o plagas, lo que requiere un monitoreo constante y a menudo implica costosos servicios de expertos agrónomos. Este gasto es viable para grandes entidades, pero representa un desafío insostenible para pequeños agricultores y emprendedores con recursos limitados, quienes se enfrentan a impactos económicos potencialmente devastadores.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="titulo">Nuestra solucion</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>LeavesCares es un sistema avanzado de detección de enfermedades en hojas mediante Inteligencia Artificial, diseñado para ayudar a los cultivos de manzanos, plantas de papa y uva, ofreciendo una herramienta accesible y económica para todos los niveles de la agricultura.</p>
+    </ion-card-content>
+  </ion-card>
+<!-- 
+  <ion-button (click)="openLeavesCaresModal()">
+    <ion-label>¿Qué es LeavesCares?</ion-label>
+    <ion-icon slot="end" name="leaf"></ion-icon>
+  </ion-button>
+  
+ -->
+
+ <!--  <ion-card>
     <ion-card-header>
 
       <ion-card-title class="titulo">Descripción</ion-card-title>
 
     </ion-card-header>
+
+    
 
     <ion-card-content>
       <p id="descripcion">
@@ -26,6 +72,56 @@
       </p>
     </ion-card-content>
 
+  </ion-card>
+ -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Ventajas y Desventajas de LeavesCares</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-accordion-group>
+        <ion-accordion>
+          <ion-item slot="header" color="primary">
+            <ion-label>Ventajas</ion-label>
+          </ion-item>
+          <ion-list slot="content">
+            <ion-item *ngFor="let ventaja of ventajas">
+              {{ ventaja.detalle }}
+            </ion-item>
+          </ion-list>
+        </ion-accordion>
+        <ion-accordion>
+          <ion-item slot="header" color="danger">
+            <ion-label>Desventajas</ion-label>
+          </ion-item>
+          <ion-list slot="content">
+            <ion-item *ngFor="let desventaja of desventajas">
+              {{ desventaja.detalle }}
+            </ion-item>
+          </ion-list>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-card-content>
+  </ion-card>
+  
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Integrantes del Proyecto</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let integrante of integrantes">
+          <ion-avatar slot="start">
+            <img [src]="integrante.imagen">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ integrante.nombre }}</h2>
+            <p>Matrícula: {{ integrante.matricula }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
   </ion-card>
   <!--
   <ion-card>
@@ -44,8 +140,8 @@
         </ion-card-content>
   </ion-card>
   -->
-  <ion-fab slot="fixed" vertical="bottom" horizontal="center">
+  <!-- <ion-fab slot="fixed" vertical="bottom" horizontal="center">
     <ion-fab-button>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab> -->
 </ion-content>

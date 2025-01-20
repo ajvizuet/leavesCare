@@ -21,12 +21,29 @@
 }
 
 
-.titulo {
-    color: var(--ion-color-primary);
-      font-weight: bold;
-      text-align: center;
+//.titulo {
+    //color: rgb(154, 242, 171);
+    //color: #add899
+      //font-weight: bold;
+      //text-align: center;
+ // }
+
+  ion-button {
+    display: flex;
+    position: relative;
+    left: 50%;
+    font-size: 1.2rem;
+    transform: translateX(-50%);
+    --background: #5aa537; 
+    --color: #ffffff; 
   }
+
  
   p#descripcion {
     text-align: justify;
   }
+
+  #pri{
+    background-color: #5aa537;
+  }
+
